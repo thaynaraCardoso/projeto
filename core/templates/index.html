@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Hello, World!</title>
+</head>
+<body>
+	<h1>Hello, World!</h1>
+    <ul>
+        {% for questao in questoes %}
+            <li> <b>{{questao.titulo}}</b> <br>
+                {{questao.pergunta}} <br>
+                {{questao.opcao1}} <br>
+                {{questao.opcao2}} <br>
+                {{questao.opcao3}}  <br>
+                <a href="{% url 'editar' questao.id %}">Editar</a>  
+                <a href="{% url 'delete' questao.id %}">Delete</a>
+            </li>
+
+        {% endfor %}
+    </ul>
+
+    <form action="{% url 'salvar' %}" method="POST">
+        {% csrf_token %}
+        <input type="text" name="titulo">Título<br>
+        <input type="text" name="pergunta">Pergunta<br>
+        <input type="text" name="opcao1">Opcao 1<br>
+        <input type="text" name="opcap2">Opcao 2<br>
+        <input type="text" name="opcao3">Opcao 3<br>
+        <input type="text" name="opcao4">Opcao 4<br>
+        <input type="number" name="correta">Qual é a opcao correta?<br>
+        <input type="text" name="msg_correta">Mensagem para acertar<br>
+        <input type="text" name="msg_errada">Mensagem para errar <br>
+        <input type="text" name="msg_neutra">Mensagem neutra <br>
+        
+        <button type="submit">Salvar</button> <!--quando clicar no botão submit, vai enviar a informação (POST) para a view que vai estar amarrada a url salvar -->
+    </form>
+
+</body>
+</html>
